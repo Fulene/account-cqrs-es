@@ -23,7 +23,7 @@ public class AccountAggregates {
 
 
     /**
-     * Fonction de décision
+     * Fonction de décision : partie metier (avant persistance)
      * @param createAccountCommand
      */
     @CommandHandler
@@ -33,7 +33,7 @@ public class AccountAggregates {
 
         AggregateLifecycle.apply(new AccountCreatedEvent(
                 createAccountCommand.getId(),
-                createAccountCommand.getInitialBalance(),
+                createAccountCommand.getInitialBalance() * .95,  // ex de procédure métier : 95% (5% de frais)
                 createAccountCommand.getCurrency()
         ));
     }
